@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KINGDOM - TATTOO</title>
+    <link rel="stylesheet" href="index.css">
+    <style>
+        /* ESTILOS PARA LA SECCIÓN DE COMENTARIOS */
+        .seccion-comentarios {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+        
+        .seccion-comentarios h2 {
+            text-align: center;
+            color: #222;
+            margin-bottom: 30px;
+            font-size: 2rem;
+        }
+        
+        .formulario {
+            background: #f5f5f5;
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .formulario input[type="text"],
+        .formulario textarea {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+        
+        .estrellas-container {
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .estrellas {
+            font-size: 30px;
+            cursor: pointer;
+            margin-bottom: 10px;
+        }
+        
+        .estrella {
+            color: #d0d0d0;
+            transition: color 0.2s;
+            margin: 0 2px;
+        }
+        
+        .estrella:hover {
+            color: #ffd700 !important;
+        }
+        
+        .estrella.seleccionada {
+            color: #222;
+        }
+        
+        .btn-enviar {
+            background: #222;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            width: 100%;
+            transition: background 0.3s;
+        }
+        
+        .btn-enviar:hover {
+            background: #444;
+        }
+        
+        .lista-comentarios {
+            margin-top: 30px;
+        }
+        
+        .comentario {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            border-left: 4px solid #222;
+        }
+        
+        .comentario-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .nombre-cliente {
+            font-weight: bold;
+            color: #222;
+            font-size: 1.1em;
+        }
+        
+        .estrellas-comentario {
+            color: #222;
+            font-size: 20px;
+        }
+        
+        .texto-comentario {
+            line-height: 1.6;
+            color: #333;
+            margin: 10px 0;
+        }
+        
+        .fecha {
+            color: #888;
+            font-size: 0.9em;
+            display: block;
+            text-align: right;
+        }
+        
+        .sin-comentarios {
+            text-align: center;
+            color: #888;
+            font-style: italic;
+            padding: 20px;
+        }
+        
+        .mensaje-alerta {
+            background: #ffeaa7;
+            color: #2d3436;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            text-align: center;
+            font-size: 0.9em;
+        }
+        
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .seccion-comentarios {
+                padding: 15px;
+                margin: 30px auto;
+            }
+            
+            .formulario {
+                padding: 15px;
+            }
+            
+            .comentario-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .estrellas-comentario {
+                margin-top: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!--HEADER-->
+    <header class="inicio">
+        <a class="paginas-header" href="#inicio">Inicio</a>
+        <a class="paginas-header" href="#artistas">Artistas</a>
+        <img class="logo1" src="IMAGENES/barbertattoologo1.png" alt="Kingdom Tattoo Logo">
+        <a class="paginas-header" href="#trabajos">Información</a>
+        <a class="paginas-header" href="#agenda">Contacto</a>
+    </header>
+
+    <!--PRIMERA SECCION-->
+    <section id="inicio" class="seccion1">
+        <h4 class="titulo-seccion1">MI CUERPO ES MI DIARIO <br> Y MIS TATUAJES SON MI HISTORIA</h4>
+    </section>
+    
+    <!--TERCERA SECCION-->
+    <section class="seccion3 reveal-on-scroll">
+        <h4 id="artistas" class="titulo-seccion">Artistas</h4>
+        <div class="artistas">
+            <div class="grupo-artistas">
+                <img class="img-artistas" src="https://i.pinimg.com/736x/8f/5d/11/8f5d112c78df7f1b98691b26cdbad5d1.jpg" alt="Bang Bang">
+                <h5 class="nom-artistas">Bang Bang</h5>
+                <p class="descripcion-artistas">Estilo Gótico/Tradicional</p>
+            </div>
+            <div class="grupo-artistas">
+                <img class="img-artistas" src="https://i.pinimg.com/1200x/a5/3a/ab/a53aab17831a0364da8841de99c7afd9.jpg" alt="Dr. Woo">
+                <h5 class="nom-artistas">Dr. Woo</h5>
+                <p class="descripcion-artistas">Minimalista/Lineas Finas</p>
+            </div>
+            <div class="grupo-artistas">
+                <img class="img-artistas" src="https://i.pinimg.com/736x/64/d5/99/64d59983279c7a4819434c35bf05c766.jpg" alt="Paul Booth">
+                <h5 class="nom-artistas">Paul Booth</h5>
+                <p class="descripcion-artistas">Blackwork/Dark art</p>
+            </div>
+        </div>
+    </section>
+
+    <!--SECCIÓN 2: TRABAJOS-->
+    <section id="trabajos" class="seccion2 reveal-on-scroll">
+        <h4  class="titulo-seccion">Nuestros trabajos</h4>
+        <div class="galeria-trabajos">
+            <img class="img-galeria-trabajos" src="https://i.pinimg.com/1200x/e2/19/22/e21922c152b4cceecdcc945d85e41e50.jpg" alt="Tatuaje 1">
+            <img class="img-galeria-trabajos" src="https://i.pinimg.com/736x/97/0b/47/970b47802f04696a1cb90aab04a10fe7.jpg" alt="Tatuaje 2">
+            <img class="img-galeria-trabajos" src="https://i.pinimg.com/1200x/0b/33/04/0b3304f3142c5b2143ecd9608a634ecc.jpg" alt="Tatuaje 3">
+            <img class="img-galeria-trabajos" src="https://i.pinimg.com/736x/04/48/0e/04480e588c62796071d527459f2b12d9.jpg" alt="Tatuaje 4">
+            <img class="img-galeria-trabajos" src="https://i.pinimg.com/736x/ef/81/1a/ef811af7d1d9410c2ffb82c265110fba.jpg" alt="Tatuaje 5">
+            <img class="img-galeria-trabajos" src="https://i.pinimg.com/1200x/da/db/c8/dadbc89b6f342de780575ed772239894.jpg" alt="Tatuaje 6">
+        </div>
+    </section>
+
+    <!--SECCIÓN DE AGENDAR TURNO-->
+    <section id="agenda" class="contacto-mapa reveal-on-scroll">
+        <div class="contenedor-mapa">
+            <div class="info-contacto">
+                <h2>Kingdom-Tattoo</h2>
+                <p><strong>Dirección:</strong> Av. Japón 123, Centro</p>
+                <p><strong>Horario:</strong> Lun-Vie: 11:00 - 20:00 | Sáb: 10:00 - 18:00</p>
+                <p><strong>Teléfono:</strong> <a href="tel:+1234567890">0993-574-822</a></p>
+                <p><strong>Email:</strong> <a href="mailto:info@tattoo.com">kingdomtattoo@gmail.com</a></p>
+                <p class="nota">Estacionamiento disponible | ♿ Accesible</p>
+            </div>
+            
+            <div class="mapa-wrapper">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3603.8667230201636!2d-57.32553822476966!3d-25.409271477574972!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x945c4adebd9bbe35%3A0xb2bacb4b9ea87972!2sAv.%20Jap%C3%B3n!5e0!3m2!1sen!2spy!4v1768141716294!5m2!1sen!2spy" 
+                    width="100%"
+                    height="100%"
+                    style="border:0;"
+                    allowfullscreen=""
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <!--SECCIÓN VALORACION CON ESTRELLAS -->
+    <section class="seccion-comentarios reveal-on-scroll">
+        <h2>Opiniones de nuestros clientes</h2>
+        
+
+        
+        <!-- FORMULARIO CON ESTRELLAS -->
+        <form id="form-comentarios" class="formulario">
+            <input type="text" name="nombre" placeholder="Tu nombre (opcional)" maxlength="30">
+            
+            <!-- ESTRELLAS -->
+            <div class="estrellas-container">
+                <p>Califica tu experiencia:</p>
+                <div class="estrellas">
+                    <span class="estrella" data-value="1">★</span>
+                    <span class="estrella" data-value="2">★</span>
+                    <span class="estrella" data-value="3">★</span>
+                    <span class="estrella" data-value="4">★</span>
+                    <span class="estrella" data-value="5">★</span>
+                </div>
+                <input type="hidden" name="puntuacion" id="puntuacion-input" value="0">
+                <p id="texto-puntuacion" style="color: #666; font-size: 0.9em; margin-top: 5px;">
+                    Haz clic en las estrellas para calificar
+                </p>
+            </div>
+            
+            <textarea name="comentario" placeholder="Comparte tu experiencia en Kingdom Tattoo..." rows="4" maxlength="500"></textarea>
+            
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 10px;">
+                <small style="color: #666;">Máximo 500 caracteres</small>
+                <small style="color: #666;" id="contador-caracteres">0/500</small>
+            </div>
+            
+            <button type="submit" class="btn-enviar">Publicar Comentario</button>
+        </form>
+        
+        <!-- LISTA DE COMENTARIOS -->
+        <div class="lista-comentarios">
+            <p class="sin-comentarios">No hay comentarios aún. ¡Sé el primero en opinar!</p>
+        </div>
+    </section>
+
+    <!--FOOTER-->
+    <footer class="reveal-on-scroll">
+        <div class="footer1">
+            <a class="paginas-footer" href="">Inicio</a>
+            <a class="paginas-footer" href="">Artistas</a>
+            <a class="paginas-footer" href="">Información</a>
+            <a class="paginas-footer" href="">Contacto</a>
+        </div>
+        <div class="footer2">
+            <p class="copy">&copy; 2024 KINGDOMTATTOO. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- JAVASCRIPT LOCALSTORAGE SIMPLE -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Animaciones scroll
+    const reveals = document.querySelectorAll('.reveal-on-scroll');
+    function checkReveals() {
+        reveals.forEach(el => {
+            const rect = el.getBoundingClientRect();
+            if (rect.top <= window.innerHeight - 100) el.classList.add('show');
+        });
+    }
+    checkReveals();
+    window.addEventListener('scroll', checkReveals);
+    
+    // ========== SISTEMA DE COMENTARIOS LOCALSTORAGE ==========
+    const COMENTARIOS_KEY = 'kingdom_tattoo_comentarios';
+    const form = document.getElementById('form-comentarios');
+    const lista = document.querySelector('.lista-comentarios');
+    const estrellas = document.querySelectorAll('.estrella');
+    const puntuacionInput = document.getElementById('puntuacion-input');
+    const textoPuntuacion = document.getElementById('texto-puntuacion');
+    const textarea = form.querySelector('textarea');
+    const contador = document.getElementById('contador-caracteres');
+    
+    let puntuacion = 0;
+    const textosPuntuacion = {
+        0: "Haz clic en las estrellas para calificar",
+        1: "Malo - No lo recomiendo",
+        2: "Regular - Podría mejorar",
+        3: "Bueno - Satisfecho",
+        4: "Muy bueno - Excelente experiencia",
+        5: "Excelente - ¡Increíble!"
+    };
+    
+    // Configurar estrellas
+    estrellas.forEach((estrella, index) => {
+        estrella.addEventListener('click', () => {
+            puntuacion = index + 1;
+            puntuacionInput.value = puntuacion;
+            actualizarEstrellas();
+            textoPuntuacion.textContent = textosPuntuacion[puntuacion] || "";
+        });
+        
+        estrella.addEventListener('mouseover', () => {
+            for(let i = 0; i <= index; i++) {
+                estrellas[i].style.color = '#222';
+            }
+        });
+        
+        estrella.addEventListener('mouseout', () => {
+            actualizarEstrellas();
+        });
+    });
+    
+    function actualizarEstrellas() {
+        estrellas.forEach((e, i) => {
+            e.style.color = i < puntuacion ? '#222' : '#d0d0d0';
+        });
+    }
+    
+    // Contador de caracteres
+    textarea.addEventListener('input', function() {
+        const longitud = this.value.length;
+        contador.textContent = `${longitud}/500`;
+        if (longitud > 490) {
+            contador.style.color = '#e74c3c';
+        } else if (longitud > 400) {
+            contador.style.color = '#f39c12';
+        } else {
+            contador.style.color = '#666';
+        }
+    });
+    
+    // Cargar comentarios al iniciar
+    cargarComentarios();
+    
+    // Enviar comentario
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const nombre = form.nombre.value.trim() || 'Cliente Anónimo';
+        const comentario = form.comentario.value.trim();
+        
+        if (!comentario) {
+            alert('Por favor, escribe un comentario');
+            return;
+        }
+        
+        if (puntuacion === 0) {
+            alert('Por favor, califica con estrellas');
+            return;
+        }
+        
+        const nuevoComentario = {
+            id: Date.now(),
+            nombre: nombre,
+            comentario: comentario,
+            puntuacion: puntuacion,
+            fecha: new Date().toLocaleString('es-PY', {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit'
+            })
+        };
+        
+        // Guardar en LocalStorage
+        guardarComentario(nuevoComentario);
+        
+        // Mostrar inmediatamente
+        mostrarComentario(nuevoComentario);
+        
+        // Limpiar formulario
+        form.reset();
+        puntuacion = 0;
+        puntuacionInput.value = 0;
+        actualizarEstrellas();
+        textoPuntuacion.textContent = textosPuntuacion[0];
+        contador.textContent = "0/500";
+        contador.style.color = "#666";
+        
+        // Mostrar mensaje de éxito
+        mostrarMensajeExito('¡Comentario publicado! Gracias por tu opinión.');
+    });
+    
+    // FUNCIONES
+    function guardarComentario(comentario) {
+        try {
+            // Obtener comentarios existentes
+            const comentarios = JSON.parse(localStorage.getItem(COMENTARIOS_KEY) || '[]');
+            
+            // Agregar nuevo comentario al principio
+            comentarios.unshift(comentario);
+            
+            // Mantener solo los últimos 20 comentarios
+            if (comentarios.length > 20) {
+                comentarios.splice(20);
+            }
+            
+            // Guardar en LocalStorage
+            localStorage.setItem(COMENTARIOS_KEY, JSON.stringify(comentarios));
+            
+            console.log('Comentario guardado en LocalStorage:', comentario);
+            
+        } catch (error) {
+            console.error('Error guardando en LocalStorage:', error);
+        }
+    }
+    
+    function cargarComentarios() {
+        try {
+            const comentarios = JSON.parse(localStorage.getItem(COMENTARIOS_KEY) || '[]');
+            
+            const sinComentarios = lista.querySelector('.sin-comentarios');
+            if (sinComentarios && comentarios.length > 0) {
+                sinComentarios.style.display = 'none';
+            }
+            
+            // Mostrar comentarios (máximo 10)
+            comentarios.slice(0, 10).forEach(comentario => {
+                mostrarComentario(comentario);
+            });
+            
+            console.log('Comentarios cargados:', comentarios.length);
+            
+        } catch (error) {
+            console.error('Error cargando comentarios:', error);
+        }
+    }
+    
+    function mostrarComentario(comentario) {
+        // Crear estrellas HTML
+        let estrellasHTML = '';
+        for (let i = 1; i <= 5; i++) {
+            estrellasHTML += i <= comentario.puntuacion ? '★' : '☆';
+        }
+        
+        const comentarioHTML = `
+            <div class="comentario" data-id="${comentario.id}">
+                <div class="comentario-header">
+                    <span class="nombre-cliente">${comentario.nombre}</span>
+                    <div class="estrellas-comentario" title="Calificación: ${comentario.puntuacion}/5">
+                        ${estrellasHTML}
+                    </div>
+                </div>
+                <p class="texto-comentario">${comentario.comentario}</p>
+                <span class="fecha">${comentario.fecha}</span>
+            </div>
+        `;
+        
+        // Insertar al principio de la lista
+        const sinComentarios = lista.querySelector('.sin-comentarios');
+        if (sinComentarios) {
+            lista.insertBefore(createElementFromHTML(comentarioHTML), sinComentarios);
+        } else {
+            lista.insertAdjacentHTML('afterbegin', comentarioHTML);
+        }
+        
+        // Limitar a 10 comentarios visibles
+        const todosComentarios = lista.querySelectorAll('.comentario');
+        if (todosComentarios.length > 10) {
+            for (let i = 10; i < todosComentarios.length; i++) {
+                todosComentarios[i].remove();
+            }
+        }
+    }
+    
+    function mostrarMensajeExito(mensaje) {
+        // Crear mensaje temporal
+        const mensajeDiv = document.createElement('div');
+        mensajeDiv.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #222;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 5px;
+            z-index: 1000;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+            animation: slideIn 0.3s ease;
+        `;
+        
+        // Animación CSS
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideIn {
+                from { transform: translateX(100%); opacity: 0; }
+                to { transform: translateX(0); opacity: 1; }
+            }
+            @keyframes fadeOut {
+                from { opacity: 1; }
+                to { opacity: 0; }
+            }
+        `;
+        document.head.appendChild(style);
+        
+        mensajeDiv.textContent = mensaje;
+        document.body.appendChild(mensajeDiv);
+        
+        // Remover después de 3 segundos
+        setTimeout(() => {
+            mensajeDiv.style.animation = 'fadeOut 0.5s ease';
+            setTimeout(() => mensajeDiv.remove(), 500);
+        }, 3000);
+    }
+    
+    // Función auxiliar para crear elemento desde HTML string
+    function createElementFromHTML(htmlString) {
+        const div = document.createElement('div');
+        div.innerHTML = htmlString.trim();
+        return div.firstChild;
+    }
+});
+</script>
+</body>
+</html>
