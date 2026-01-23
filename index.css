@@ -61,7 +61,7 @@
 /*CSS ORIGINAL*/
 body{
     background-color: white;
-    cursor: none;
+    cursor: default;
     margin: 0;
     padding: 0;
     width: 100%;
@@ -581,5 +581,5 @@ footer {
     }
 }
 *{
-    cursor: none;
+    cursor: default;
 }
