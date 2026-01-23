@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -169,11 +169,34 @@
 <body>
     <!--HEADER-->
     <header class="inicio">
-        <a class="paginas-header" href="#inicio">Inicio</a>
-        <a class="paginas-header" href="#artistas">Artistas</a>
+        <!-- Botón hamburguesa (tres rayitas) para móviles -->
+        <button class="menu-hamburguesa" id="menuBtn" aria-label="Abrir menú">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        
+        <!-- Logo EN EL CENTRO -->
         <img class="logo1" src="IMAGENES/barbertattoologo1.png" alt="Kingdom Tattoo Logo">
-        <a class="paginas-header" href="#trabajos">Información</a>
-        <a class="paginas-header" href="#agenda">Contacto</a>
+        
+        <!-- Enlaces del menú (visibles en desktop) -->
+        <div class="menu-desktop">
+            <a class="paginas-header" href="#inicio">Inicio</a>
+            <a class="paginas-header" href="#artistas">Artistas</a>
+            <a class="paginas-header" href="#trabajos">Información</a>
+            <a class="paginas-header" href="#agenda">Contacto</a>
+        </div>
+        
+        <!-- Overlay oscuro para cerrar el menú -->
+        <div class="menu-overlay" id="menuOverlay"></div>
+        
+        <!-- Menú móvil (sale desde la izquierda) -->
+        <div class="menu-mobile" id="mobileMenu">
+            <a class="paginas-header" href="#inicio">Inicio</a>
+            <a class="paginas-header" href="#artistas">Artistas</a>
+            <a class="paginas-header" href="#trabajos">Información</a>
+            <a class="paginas-header" href="#agenda">Contacto</a>
+        </div>
     </header>
 
     <!--PRIMERA SECCION-->
@@ -245,8 +268,6 @@
     <section class="seccion-comentarios reveal-on-scroll">
         <h2>Opiniones de nuestros clientes</h2>
         
-
-        
         <!-- FORMULARIO CON ESTRELLAS -->
         <form id="form-comentarios" class="formulario">
             <input type="text" name="nombre" placeholder="Tu nombre (opcional)" maxlength="30">
@@ -286,10 +307,10 @@
     <!--FOOTER-->
     <footer class="reveal-on-scroll">
         <div class="footer1">
-            <a class="paginas-footer" href="">Inicio</a>
-            <a class="paginas-footer" href="">Artistas</a>
-            <a class="paginas-footer" href="">Información</a>
-            <a class="paginas-footer" href="">Contacto</a>
+            <a class="paginas-footer" href="#inicio">Inicio</a>
+            <a class="paginas-footer" href="#artistas">Artistas</a>
+            <a class="paginas-footer" href="#trabajos">Información</a>
+            <a class="paginas-footer" href="#agenda">Contacto</a>
         </div>
         <div class="footer2">
             <p class="copy">&copy; 2024 KINGDOMTATTOO. Todos los derechos reservados.</p>
@@ -299,6 +320,73 @@
     <!-- JAVASCRIPT LOCALSTORAGE SIMPLE -->
 <script>
 document.addEventListener('DOMContentLoaded', function() {
+    // ========== MENÚ HAMBURGUESA ==========
+    const menuBtn = document.getElementById('menuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const menuOverlay = document.getElementById('menuOverlay');
+    
+    if (menuBtn && mobileMenu && menuOverlay) {
+        // Abrir menú al hacer clic en las rayitas
+        menuBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            this.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+            menuOverlay.classList.toggle('active');
+            // Bloquear scroll cuando el menú está abierto
+            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+        });
+        
+        // Cerrar menú al hacer clic en el overlay (área oscura)
+        menuOverlay.addEventListener('click', function() {
+            closeMenu();
+        });
+        
+        // Cerrar menú al hacer clic en cualquier enlace del menú
+        const mobileLinks = mobileMenu.querySelectorAll('.paginas-header');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                
+                // Cerrar el menú primero
+                closeMenu();
+                
+                // Luego navegar a la sección
+                setTimeout(() => {
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                }, 300);
+            });
+        });
+        
+        // Cerrar menú al presionar la tecla Escape
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                closeMenu();
+            }
+        });
+        
+        // Cerrar menú al redimensionar la ventana
+        window.addEventListener('resize', function() {
+            if (window.innerWidth > 768) {
+                closeMenu();
+            }
+        });
+        
+        // Función para cerrar el menú
+        function closeMenu() {
+            menuBtn.classList.remove('active');
+            mobileMenu.classList.remove('active');
+            menuOverlay.classList.remove('active');
+            document.body.style.overflow = ''; // Restaurar scroll
+        }
+    }
+    
     // Animaciones scroll
     const reveals = document.querySelectorAll('.reveal-on-scroll');
     function checkReveals() {

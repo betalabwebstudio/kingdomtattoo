@@ -15,6 +15,20 @@
     opacity: 0;
     transform: translateY(-30px);
     animation: slideDown 1s ease forwards;
+    position: fixed; /* Header fijo */
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: white;
+    z-index: 1000;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+/* Efecto al hacer scroll */
+.inicio.scrolled {
+    padding: 0.5rem 1rem;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.15);
 }
 
 @keyframes slideDown {
@@ -28,7 +42,7 @@
 .titulo-seccion1 {
     text-align: center;
     position: absolute;
-    top: 25%;
+    top: 50%; /* Ajustado para mejor centrado */
     left: 50%;
     transform: translate(-50%, -50%);
     color: white;
@@ -51,74 +65,99 @@ body{
     margin: 0;
     padding: 0;
     width: 100%;
+    padding-top: 70px; /* Espacio para el header fijo */
 }
 
-/*INICIO*/s
-.logo1{
-    width: 58px;
+/* ========== HEADER STICKY - LOGO IZQUIERDA ========== */
+.logo1 {
+    width: 100px;
     max-width: 100%;
+    height: auto;
+    transition: all 0.3s ease;
 }
 
-.inicio{
+/* Logo más pequeño al hacer scroll */
+.inicio.scrolled .logo1 {
+    width: 45px;
+}
+
+.inicio {
     display: flex;
-    justify-content: center; /* Centra todo el grupo */
+    justify-content: space-between;
     align-items: center;
     padding: 1rem;
-    gap: 15px; /* Espacio entre elementos */
-    flex-wrap: nowrap; /* No se rompe la línea */
     max-width: 1200px;
     margin: 0 auto;
-    overflow-x: auto; /* Para móviles si no cabe */
-    white-space: nowrap; /* Evita saltos de línea */
 }
 
-.paginas-header{
+/* Botón hamburguesa a la derecha - OCULTO EN DESKTOP */
+.menu-hamburguesa {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 25px;
+    height: 20px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    z-index: 1001;
+    order: 2;
+}
+
+.menu-hamburguesa span {
+    width: 100%;
+    height: 3px;
+    background-color: black;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+/* Logo a la izquierda */
+.logo1 {
+    order: 0;
+}
+
+/* Animación para las rayitas cuando está activo */
+.menu-hamburguesa.active span:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 6px);
+}
+
+.menu-hamburguesa.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.menu-hamburguesa.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* Estilo de los enlaces del menú en desktop */
+.paginas-header {
     font-size: 10px;
     font-family: Impact;
     text-decoration: none;
     color: black;
-    padding: 0.2rem;
-    white-space: nowrap; /* Texto en una sola línea */
-    flex-shrink: 0; /* No se encoge */
+    padding: 0.2rem 0.5rem;
+    white-space: nowrap;
+    transition: all 0.3s ease;
 }
 
-.paginas-header:hover{
-    transition: 0.5s;
+.paginas-header:hover {
     transform: scale(1.1);
+    color: #333;
 }
 
-/* Para móviles - ajustar el espaciado */
-@media (max-width: 768px){
-    .inicio{
-        gap: 8px; /* Menor espacio en móviles */
-        padding: 0.8rem;
-        justify-content: space-around; /* Distribuye mejor el espacio */
-    }
-    
-    .paginas-header{
-        font-size: 9px; /* Texto un poco más pequeño */
-        padding: 0.1rem 0.3rem;
-    }
-    
-    .logo1{
-        width: 45px; /* Logo más pequeño en móviles */
-    }
-}
-
-/* Para pantallas muy pequeñas */
-@media (max-width: 480px){
-    .inicio{
-        gap: 5px;
-        padding: 0.5rem;
-    }
-    
-    .paginas-header{
-        font-size: 8px;
-    }
-    
-    .logo1{
-        width: 40px;
-    }
+.titulo-seccion1{
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    width: 100%;
+    text-shadow: 2px 2px 6px rgba(70, 70, 70, 10.0);
+    padding: 0 20px;
+    box-sizing: border-box;
 }
 
 /*PRIMERA-SECCION*/
@@ -130,11 +169,13 @@ body{
     width: 100%;
     opacity: 80%;
     position: relative;
+    margin-top: -70px; /* Compensa el padding del body */
 }
 
 @media (min-width: 768px){
     .seccion1{
         height: 400px;
+        margin-top: -80px;
     }
     .inicio{
         justify-content: space-between;
@@ -145,9 +186,13 @@ body{
 @media (min-width: 1024px){
     .seccion1{
         height: 500px;
+        margin-top: -90px;
     }
     .logo1{
         width: 250px;
+    }
+    .inicio.scrolled .logo1 {
+        width: 200px;
     }
 }
 
@@ -242,183 +287,137 @@ body{
     max-width: 100px;
 }
 
-/* SECCIÓN COMENTARIOS RESPONSIVE */
-.seccion-comentarios {
-    padding: 40px 20px;
-    max-width: 800px;
-    margin: 30px auto;
-}
-
-.seccion-comentarios h2 {
-    text-align: center;
-    margin-bottom: 25px;
-    color: #222;
-    font-size: 1.6rem;
-    font-weight: 400;
-    letter-spacing: 0.5px;
-}
-
-/* FORMULARIO AJUSTADO */
-.formulario {
-    background: #f5f5f5;
-    padding: 25px;
-    border-radius: 10px;
-    margin-bottom: 30px;
-    box-shadow: 0 3px 10px rgba(0,0,0,0.1);
-}
-
-/* INPUTS ESTÁTICOS (sin hover exagerado) */
-.formulario input,
-.formulario textarea {
-    width: 93%;
-    padding: 12px;
-    margin-bottom: 15px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 16px;
-    font-family: 'Helvetica Neue', Arial, sans-serif;
-    background: #f9f9f9;
-    resize: none;
-    box-sizing: border-box;
-}
-
-/* Solo color de foco sutil */
-.formulario input:focus,
-.formulario textarea:focus {
-    border-color: #bbb;
-    outline: none;
-    background: white;
-}
-
-/* ESTRELLAS */
-.estrellas-container {
-    text-align: center;
-    margin: 12px 0;
-}
-
-.estrellas {
-    display: flex;
-    justify-content: center;
-    gap: 6px;
-    font-size: 30px;
-    cursor: pointer;
-    margin-bottom: 6px;
-}
-
-.estrella {
-    color: #d0d0d0;
-}
-
-.estrella.seleccionada {
-    color: #222;
-}
-
-.puntuacion-texto {
-    font-size: 12px;
-    color: #777;
-    font-weight: 300;
-}
-
-/* BOTÓN SIMPLE */
-.btn-enviar {
-    background: #222;
-    color: white;
-    border: none;
-    padding: 12px 25px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: bold;
-    width: 100%;
-    transition: background 0.3s;
-}
-
-.btn-enviar:hover {
-    background: #444;
-}
-
-/* COMENTARIOS COMPACTOS */
-.lista-comentarios {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-}
-
-.comentario {
-    background: white;
-    padding: 20px;
-    border-radius: 8px;
-    margin-bottom: 20px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    border-left: 4px solid #222;
-}
-
-.comentario-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 10px;
-}
-
-.nombre-cliente {
-    font-weight: bold;
-    color: #222;
-    font-size: 1.1em;
-}
-
-.estrellas-comentario {
-    color: #222;
-    font-size: 20px;
-}
-
-.texto-comentario {
-    line-height: 1.6;
-    color: #333;
-    margin: 10px 0;
-}
-
-.fecha {
-    color: #888;
-    font-size: 0.9em;
-    display: block;
-    text-align: right;
-}
-
-.sin-comentarios {
-    text-align: center;
-    color: #888;
-    font-style: italic;
-    padding: 20px;
-}
-
-.mensaje-alerta {
-    background: #ffeaa7;
-    color: #2d3436;
-    padding: 10px;
-    border-radius: 5px;
-    margin-bottom: 15px;
-    text-align: center;
-    font-size: 0.9em;
-}
-
-/* RESPONSIVE */
+/* ========== RESPONSIVE PARA MÓVILES ========== */
 @media (max-width: 768px) {
-    .seccion-comentarios {
-        padding: 15px;
-        margin: 30px auto;
+    /* Ocultar enlaces del menú en móviles */
+    .inicio .paginas-header {
+        display: none;
     }
     
-    .formulario {
-        padding: 15px;
+    /* Mostrar botón hamburguesa en móviles */
+    .menu-hamburguesa {
+        display: flex;
+        order: 2;
     }
     
-    .comentario-header {
+    /* Logo a la izquierda en móviles */
+    .logo1 {
+        order: 0;
+    }
+    
+    /* Menú desplegable para móviles - SALE DESDE LA DERECHA */
+    .menu-mobile {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 80%;
+        max-width: 300px;
+        height: 100vh;
+        background-color: white;
         flex-direction: column;
-        align-items: flex-start;
+        gap: 0;
+        padding: 80px 0 0 0;
+        box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+        z-index: 998;
+        transition: right 0.3s ease-in-out;
+        overflow-y: auto;
+        display: flex;
     }
     
-    .estrellas-comentario {
-        margin-top: 5px;
+    .menu-mobile.active {
+        right: 0;
+    }
+    
+    /* Overlay oscuro cuando el menú está abierto */
+    .menu-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 997;
+    }
+    
+    .menu-overlay.active {
+        display: block;
+    }
+    
+    /* Estilo de enlaces en menú móvil */
+    .menu-mobile .paginas-header {
+        display: block;
+        width: 100%;
+        text-align: left;
+        padding: 15px 25px;
+        font-size: 16px;
+        border-bottom: 1px solid #f0f0f0;
+        margin: 0;
+        color: #222;
+        text-decoration: none;
+        transition: background-color 0.3s;
+    }
+    
+    .menu-mobile .paginas-header:hover {
+        background-color: #f5f5f5;
+        transform: none;
+    }
+    
+    .menu-mobile .paginas-header:last-child {
+        border-bottom: none;
+    }
+    
+    /* Ajustar el logo en móviles */
+    .logo1 {
+        width: 50px;
+    }
+    
+    .inicio {
+        padding: 0.8rem 1rem;
+        position: fixed;
+        z-index: 999;
+    }
+    
+    /* Ajustar body padding para móviles */
+    body {
+        padding-top: 60px;
+    }
+    
+    .seccion1 {
+        margin-top: -60px;
+    }
+    
+    /* Logo más pequeño al hacer scroll en móviles */
+    .inicio.scrolled .logo1 {
+        width: 40px;
+    }
+}
+
+/* Para pantallas muy pequeñas */
+@media (max-width: 480px) {
+    .logo1 {
+        width: 45px;
+    }
+    
+    .menu-hamburguesa {
+        width: 22px;
+        height: 18px;
+    }
+    
+    .menu-mobile {
+        width: 85%;
+    }
+    
+    body {
+        padding-top: 55px;
+    }
+    
+    .seccion1 {
+        margin-top: -55px;
+    }
+    
+    .inicio.scrolled .logo1 {
+        width: 35px;
     }
 }
 
@@ -552,7 +551,6 @@ footer {
 @media (max-width: 480px) {
     .titulo-seccion1 {
         font-size: 1.2rem !important;
-        top: 20%;
         padding: 0 10px;
     }
     
